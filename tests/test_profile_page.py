@@ -15,6 +15,7 @@ def test_go_to_profile_page_click_on_the_account_button_goes_to_the_profile_page
     driver.find_element(*button_sign_in).click()
 
     # Переход в личный кабинет
+    driver.find_element(*button_account).is_displayed()
     driver.find_element(*button_account).click()
     WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located(input_login))
     current_email = driver.find_element(*input_login).get_attribute('value')
@@ -23,8 +24,6 @@ def test_go_to_profile_page_click_on_the_account_button_goes_to_the_profile_page
     # Проверка что url ведет на страниц профиля
     current_url = driver.current_url
     assert current_url == url_profile
-
-    driver.quit()
 
 
 # Переход из личного кабинета в конструктор по нажатию на кнопку Конструктор
@@ -36,6 +35,7 @@ def test_go_from_profile_page_to_constructor_page_click_on_the_constructor_butto
     driver.find_element(*button_sign_in).click()
 
     # Переход в личный кабинет
+    driver.find_element(*button_account).is_displayed()
     driver.find_element(*button_account).click()
     WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located(input_login))
     # Нажатие на кнопку Конструктор
@@ -43,8 +43,6 @@ def test_go_from_profile_page_to_constructor_page_click_on_the_constructor_butto
     # Проверка что страница конструктора
     current_url = driver.current_url
     assert current_url == url_home
-
-    driver.quit()
 
 
 # Переход из личного кабинета в конструктор по нажатию на логотип Stellar Burgers
@@ -56,6 +54,7 @@ def test_go_from_profile_page_to_constructor_page_click_on_the_logo_goes_to_the_
     driver.find_element(*button_sign_in).click()
 
     # Переход в личный кабинет
+    driver.find_element(*button_account).is_displayed()
     driver.find_element(*button_account).click()
     WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located(input_login))
     # Нажатие на логотип Stellar Burgers
@@ -63,8 +62,6 @@ def test_go_from_profile_page_to_constructor_page_click_on_the_logo_goes_to_the_
     # Проверка что страница конструктора
     current_url = driver.current_url
     assert current_url == url_home
-
-    driver.quit()
 
 
 # Выход по кнопке «Выйти» в личном кабинете
@@ -76,6 +73,7 @@ def test_logout_click_on_the_logout_button_goes_to_login_page(driver, user):
     driver.find_element(*button_sign_in).click()
 
     # Переход в личный кабинет
+    driver.find_element(*button_account).is_displayed()
     driver.find_element(*button_account).click()
     WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located(input_login))
     # Нажатие на кнопку Выход
@@ -84,5 +82,3 @@ def test_logout_click_on_the_logout_button_goes_to_login_page(driver, user):
     WebDriverWait(driver, 10).until(expected_conditions.url_to_be(url_login))
     current_url = driver.current_url
     assert current_url == url_login
-
-    driver.quit()

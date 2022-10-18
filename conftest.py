@@ -4,20 +4,15 @@ from selenium import webdriver
 from tests.elements import *
 
 
-# Генератор почты
-def email_generate():
-    number = r.randint(000, 999)
-    email = f"safonov_nikolay_003_{number}@yandex.ru"
+# Фикстура для создания  и закрытия драйвера
+@pytest.fixture
+def driver():
+    driver = webdriver.Chrome()
+    driver.maximize_window()
 
-    return email
+    yield driver
 
-
-# Функция которая создает объет Пользователь
-class User:
-    def __init__(self, name='Николай', password='123456'):
-        self.name = name
-        self.email = email_generate()
-        self.password = password
+    driver.quit()
 
 
 # фикстура, которая создает и регистрирует пользователя
@@ -35,10 +30,17 @@ def user(driver):
     return user
 
 
-# Фикстура для создания драйвера
-@pytest.fixture
-def driver():
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+# Генератор почты
+def email_generate():
+    number = r.randint(000, 999)
+    email = f"safonov_nikolai_03_{number}@yandex.ru"
 
-    return driver
+    return email
+
+
+# Функция которая создает объет Пользователь
+class User:
+    def __init__(self, name='Николай', password='123456'):
+        self.name = name
+        self.email = email_generate()
+        self.password = password

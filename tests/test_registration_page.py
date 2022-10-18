@@ -14,13 +14,12 @@ def test_registration_correct_email_and_password_the_email_in_the_profile_matche
     driver.find_element(*button_sign_in).click()
 
     # Переход в личный кабинет
+    driver.find_element(*button_account).is_displayed()
     driver.find_element(*button_account).click()
     WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located(input_login))
     current_email = driver.find_element(*input_login).get_attribute('value')
     # Проверка почты в профиле с почтой указанной при регистрации
     assert current_email == user.email
-
-    driver.quit()
 
 
 # Регистрация пользователя с неверным паролем
@@ -36,5 +35,3 @@ def test_registration_invalid_password_password_error_is_displayed(driver, user)
     # Проверка ошибки пароля
     error_text = driver.find_element(*password_error).text
     assert error_text == 'Некорректный пароль'
-
-    driver.quit()
